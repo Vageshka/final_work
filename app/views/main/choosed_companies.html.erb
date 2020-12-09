@@ -1,0 +1,30 @@
+<table class="table my-table text">
+  <thead>
+    <tr class="text-center">
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Cancel the offer</th>
+      <th scope="col">More detailed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @companies.each_with_index do |comp,i| %>
+      <tr class="text-center">
+        <th scope="row"><%= i+1 %></th>
+        <td><%= comp[:name] %></td>
+        <td><%= button_to "cancel", "/main/cancel_offer/#{comp[:id].to_s}.json", remote: true, class: "btn btn-lg wide" %></td>
+        <td><%= button_to "▼", "/main/all_companies/#{comp[:id].to_s}.json", remote: true, class: "btn btn-lg wide", id: "btn"+comp[:id].to_s %></td>
+      </tr>
+      <tr>
+        <td  id=<%= comp[:id].to_s %> colspan="4" hidden="true">
+          <ul>
+            <li> Vacancy <p></p> </li>
+            <li> Requirements <p></p></li>
+            <li> Conditions <p></p></li>
+          </ul>
+          <input type="button" class="btn btn-lg wide roll_up" value="▲" />
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

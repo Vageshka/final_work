@@ -1,0 +1,47 @@
+<h1 class="welcome">Registation</h1>
+
+<%= form_with(url: main_create_path, local: true ) do |form| %>
+  <% if flash[:error] %>
+    <div id="error_explanation">
+      <h2><%= pluralize(flash[:error].count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% flash[:error].each do |message| %>
+          <li><%= message.sub("Password is invalid","The password must consist of Latin characters, numbers, and at least one uppercase letter") %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="form-group-lg row text">
+    <%= form.label :login %>
+    <%= form.text_field :login %>
+  </div>
+
+  <div class="form-group-lg row text">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="form-group-lg row text">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div class="form-group-lg row text">
+    <p><%= "Аккаунт создается для" %></p>
+    <div>
+      <input type="radio" id="Choice1" name="company" value="student" checked>
+      <label for="Choice1"><%= "Student" %></label>
+
+      <input type="radio" id="Choice2" name="company" value="company">
+      <label for="Choice2"><%= "Company" %></label>
+    </div>
+  </div>
+
+  <div class="form-group-lg row text">
+    <%= form.submit class: "btn btn-primary btn-lg" %>
+  </div>
+<% end %>
+
+
+<p class="text"> Already have account? <%= link_to 'Log in', session_new_path %></p>

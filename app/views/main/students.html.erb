@@ -1,0 +1,22 @@
+<% unless @_current_user.company %>
+
+  <div class="text-center selection_menu">
+    <div class="row">
+      <%= link_to 'All companies', main_all_companies_path %>
+    </div>
+    <div class="row">
+      <%= link_to 'All selected', main_choosed_companies_path %>
+    </div>
+    <div class="row">
+      <%= link_to 'Approved', session_new_path %>
+    </div>
+  </div>
+
+<% else %>
+  <h2 class="welcome">
+    Sorry,
+  </h2>
+  <p class="text text-center">
+    this page only for students. You can go to <%= link_to 'companies page', main_companies_path %>
+  </p>
+<% end %>

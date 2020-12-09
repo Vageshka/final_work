@@ -1,0 +1,22 @@
+<% if @_current_user.company %>
+
+  <div class="text-center selection_menu">
+    <div class="row">
+    <%= link_to 'All applications', session_new_path %>
+    </div>
+    <div class="row">
+    <%= link_to 'Pending confirmations', session_new_path %>
+    </div>
+    <div class="row">
+    <%= link_to 'Approved', session_new_path %>
+    </div>
+  </div>
+
+<% else %>
+  <h2 class="welcome">
+    Sorry,
+  </h2>
+  <p class="text text-center">
+    this page only for companies. You can go to <%= link_to 'student page', main_students_path %>
+  </p>
+<% end %>

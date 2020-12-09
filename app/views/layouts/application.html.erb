@@ -10,6 +10,24 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <nav class="navbar navbar-expand-lg my-navbar my-nav">
+        <a class="navbar-brand" href="/"><%= image_tag "Gerb_mgtu.png", id: "logo" %></a>
+        <%= link_to "Students", main_students_path, class: "link navbar-item" %>
+        <%= link_to "Companies", main_companies_path, class: "link navbar-item" %>
+        <% if @_current_user %>
+          <div class="ml-auto">
+            <%= link_to(@_current_user.login, main_edit_path, class: "link login") %>
+            <%= link_to("Log out", session_destroy_path, method: :delete, class: "link login") %>
+          <div class=ml-auto"
+        <% else %>
+          <%= link_to("Log in", session_new_path, class: "ml-auto login link") %>
+        <% end %>
+      </nav>
+    </header>
+    <main class="container">
+      <%= yield %>
+    </main>
+
   </body>
 </html>

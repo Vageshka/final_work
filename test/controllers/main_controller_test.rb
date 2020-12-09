@@ -1,0 +1,49 @@
+require 'test_helper'
+
+class MainControllerTest < ActionDispatch::IntegrationTest
+#  test "should get index" do
+#    get main_index_url
+#    assert_response :success
+#  end
+#
+#  test "should get new" do
+#    get main_new_url
+#    assert_response :success
+#  end
+#
+#  test "should get create" do
+#    get main_create_url
+#    assert_response :success
+#  end
+#
+#  test "should get companies" do
+#    get main_companies_url
+#    assert_response :success
+#  end
+#
+#  test "should get comp_show" do
+#    get main_comp_show_url
+#    assert_response :success
+#  end
+#
+#  test "should get students" do
+#    get main_students_url
+#    assert_response :success
+#  end
+#
+#  test "should get stud_show" do
+#    get main_stud_show_url
+#    assert_response :success
+#  end
+#
+#  test "should get edit" do
+#    get main_edit_url
+#    assert_response :success
+#  end
+#
+#  test "should get update" do
+#    get main_update_url
+#    assert_response :success
+#  end
+#
+end

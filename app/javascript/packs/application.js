@@ -15,3 +15,6 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+import '../src/file_error.js'
+import '../src/links.js'
+import '../src/all_companies.js'
