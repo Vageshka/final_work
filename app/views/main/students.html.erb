@@ -1,25 +1,25 @@
 <% unless @_current_user.company %>
 
-  <% if offer =Offer.find_by(student_id: @student.id, stud_agree: true) %>
+  <% if offer = Offer.find_by(student_id: @student.id, stud_agree: true) %>
     <% company = Company.find(offer.company_id) %>
     <p class="text text-center">
       You have already chosen a company
     </p>
     <ul class=text>
       <li>
-        Company name <br/>
+        <%= t("Name") %> <br/>
         <p><%= simple_format company.name %></p>
       </li>
       <li>
-        Vacancy <br/>
+        <%= t("Vacancy") %> <br/>
         <p><%= simple_format company.vacancy %></p>
       </li>
       <li>
-        Requirements <br/>
+        <%= t("Requirements") %> <br/>
         <p><%= simple_format company.requirements %></p>
       </li>
       <li>
-        Conditions <br/>
+        <%= t("Conditions") %> <br/>
         <p><%= simple_format company.conditions %></p>
       </li>
     </ul>
@@ -27,22 +27,22 @@
   <% else %>
     <div class="text-center selection_menu">
       <div class="row">
-        <%= link_to 'All companies', main_all_companies_path %>
+        <%= link_to t('All companies'), main_all_companies_path %>
       </div>
       <div class="row">
-        <%= link_to 'All selected', main_choosed_companies_path %>
+        <%= link_to t('All selected'), main_choosed_companies_path %>
       </div>
       <div class="row">
-        <%= link_to 'Waiting for approval', main_waiting_approval_path %>
+        <%= link_to t('Waiting for approval'), main_waiting_approval_path %>
       </div>
     </div>
   <% end %>
 
 <% else %>
   <h2 class="welcome">
-    Sorry,
+    <%= t("Sorry")+"," %>
   </h2>
   <p class="text text-center">
-    this page only for students. You can go to <%= link_to 'companies page', main_companies_path %>
+    <%= t("only for students") %> <%= link_to ' '+t('company page'), main_companies_path %>
   </p>
 <% end %>

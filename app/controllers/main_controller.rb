@@ -46,23 +46,23 @@ class MainController < ApplicationController
     if @_current_user.company
       company = Company.find_by_user_id(session[:current_user_id])
       if company
-        company.update(pars_params_company) ? status = "ok" : status = "error"
+        company.update(pars_params_company) ? status = "ok" : status = company.errors.full_messages
       else
         company = Company.new(pars_params_company)
-        company.save ? status = "ok" : status = "error"
+        company.save ? status = "ok" : status = company.errors.full_messages
       end
 
     else
       student = Student.find_by_user_id(session[:current_user_id])
       if student
-        student.update(pars_params_student) ? status = "ok" : status = "error"
+        student.update(pars_params_student) ? status = "ok" : status = student.errors.full_messages
       else
         student = Student.new(pars_params_student)
-        student.save ? status = "ok" : status = "error"
+        student.save ? status = "ok" : status = student.errors.full_messages
       end
     end
 
-    flash.now[:status] = status == "ok" ? "Successfully updated." : company.errors.full_messages
+    flash.now[:status] = status == "ok" ? "Successfully updated." : status
     set_student
     set_company
     render "edit#{company ? "_company" : "_student"}"

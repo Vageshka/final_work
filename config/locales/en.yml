@@ -30,4 +30,61 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  "Students": "Students"
+  "Companies": "Companies"
+  "Log out": "Log out"
+  "Log in": "Log in"
+  "Name": "Name"
+  "What looking for": "What looking for"
+  "Accept": "Accept"
+  "More detailed": "More detailed"
+  "accept": "accept"
+  "Departament": "Departament"
+  "Group": "Group"
+  "Example of work": "Example of work"
+  "Offered": "Offered"
+  "Offer yourself": "Offer yourself"
+  "offer": "offer"
+  "Vacancy": "Vacancy"
+  "Requirements": "Requirements"
+  "Conditions": "Conditions"
+  "Cancel the offer": "Cancel the offer"
+  "cancel": "cancel"
+  "Cancel the acceptance": "Cancel the acceptance"
+  "Approve an internship at company": "Approve an internship at company"
+  "approve": "approve"
+  'All applications': 'All applications'
+  'Pending confirmations': 'Pending confirmations'
+  'Approved': 'Approved'
+  "Sorry": "Sorry"
+  "student page": "student page"
+  "only for companies": "this page only for companies. You can go to"
+  "company page": "company page"
+  "only for students": "this page only for students. You can go to"
+  "edit_company page description": "Here you can add or change infromation about your company"
+  "Company name": "Company name"
+  "Who are you looking for (vacancy)": "Who are you looking for (vacancy)"
+  "Save": "Save"
+  "edit_student page description": "Here you can add or change infromation about yourself"
+  "fullname": "Fullname"
+  "Current uploaded file": "Current uploaded file"
+  "Login": "Login"
+  "Password": "Password"
+  "Password confirmation": "Password confirmation"
+  "An account is created for": "An account is created for"
+  "Student": "Student"
+  "Company": "Company"
+  "Already have account?": "Already have account?"
+  "New user?": "New user?"
+  'Sign up': 'Sign up'
+  "index info": "This website was created to simplify the selection of students in the company for internships.
+Students need to choose a company and apply.
+Companies must review applications and approve some of them."
+  "What are you looking for?": "What are you looking for?"
+  "yes": "yes"
+  "no": "no"
+  'All companies': 'All companies'
+  'All selected': 'All selected'
+  'Waiting for approval': 'Waiting for approval'
+  "Welcome": "Welcome"
+  "Successfully updated": "Successfully updated"

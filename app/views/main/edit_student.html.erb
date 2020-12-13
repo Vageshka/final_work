@@ -1,30 +1,36 @@
-<h1 class="description">Here you can add or change infromation about yourself</h1>
+<h1 class="description"><%= t("edit_student page description") %></h1>
 
 <% if flash[:status] %>
   <div id="<%= flash[:status] =~ /Successfully/ ? "success_explanation" : "error_explanation" %>">
-    <h2><%= flash[:status] %></h2>
+    <% if flash[:status].is_a?(Array) %>
+      <% flash[:status].each do |mes| %>
+        <h2><%= mes %></h2>
+      <% end %>
+    <% else %>
+      <% t.(flash[:status]) %>
+    <% end %>
   </div>
 <% end %>
 
 <%= form_with( local: true ) do |form| %>
 
   <div class="form-group-lg row text">
-    <%= form.label :fullname %>
+    <%= form.label t("fullname") %>
     <%= form.text_field :fullname, value: @student ? @student.fullname : "" %>
   </div>
 
   <div class="form-group-lg row text">
-    <%= form.label :departament %>
+    <%= form.label t("Departament") %>
     <%= form.text_field :departament, value: @student ? @student.departament : "" %>
   </div>
 
   <div class="form-group-lg row text">
-    <%= form.label :group %>
+    <%= form.label t("Group") %>
     <%= form.text_field :group, value: @student ? @student.group : "" %>
   </div>
 
   <div class="form-group-lg row text">
-    <%= form.label :wish %>
+    <%= form.label t("What are you looking for?") %>
     <%= form.text_field :wish, value: @student ? @student.wish : "" %>
   </div>
 
@@ -34,8 +40,8 @@
   </div>
 
   <div class="form-group-lg row text">
-    <%= form.submit "Save", class: "btn btn-primary btn-lg" %>
+    <%= form.submit t("Save"), class: "btn btn-primary btn-lg" %>
   </div>
 <% end %>
 
-<%= button_to "Текущий загруженный файл", files_path(@student), method: :get, class: "btn btn-primary btn-lg wide" %>
+<%= button_to t("Current uploaded file"), files_path(@student), method: :get, class: "btn btn-primary btn-lg wide" %>

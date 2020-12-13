@@ -1,0 +1,95 @@
+ru:
+  "Students": "Студентам"
+  "Companies": "Компаниям"
+  "Log out": "Выйти"
+  "Log in": "Войти"
+  "Name": "Название"
+  "What looking for": "Чем хочет заниматься"
+  "Accept": "Принять"
+  "More detailed": "Больше информации"
+  "accept": "принять"
+  "Departament": "Кафедра"
+  "Group": "Группа"
+  "Example of work": "Пример работы"
+  "Offered": "Предложенно?"
+  "Offer yourself": "Подать заявку"
+  "offer": "подать"
+  "Vacancy": "Вакансия"
+  "Requirements": "Требования"
+  "Conditions": "Условия"
+  "Cancel the offer": "Отменить предложение"
+  "cancel": "отменить"
+  "Cancel the acceptance": "Отменить приняте"
+  "Approve an internship at company": "Утвердить практику в компании"
+  "approve": "утвердить"
+  'All applications': 'Все заявки'
+  'Pending confirmations': 'Ожидающие подтверждения'
+  'Approved': 'Подтвержденные'
+  "Sorry": "Извините"
+  "student page": "страницу для студентов"
+  "only for companies": "Эта страница только для компаний. Перейти на"
+  "company page": "страницу для компаний"
+  "only for students": "Эта страница только для студентов. Перейти на"
+  "edit_company page description": "Здесь Вы можете добавить или изменить информации о своей компании"
+  "Company name": "Название компании"
+  "Who are you looking for (vacancy)": "Кого вы ищите (Вакансия)"
+  "Save": "Сохранить"
+  "edit_student page description": "Здесь Вы можете добавить или изменить информации о себе"
+  "fullname": "ФИО"
+  "Current uploaded file": "Текущий загруженный файл"
+  "Login": "Логин"
+  "Password": "Пароль"
+  "Password confirmation": "Подтвердите пароль"
+  "An account is created for": "Аккаунт создается для"
+  "Student": "Студента"
+  "Company": "Компании"
+  "Already have account?": "Уже есть аккаунт?"
+  "New user?": "Новый пользватель?"
+  'Sign up': 'Зарегистрироваться'
+  "index info": "Этот веб-сайт был создан для упрощения отбора студентов в компании для прохождения практики.
+Студентам необходимо выбрать компанию и подать заявку.
+Компании должны рассмотреть заявки и одобрить некоторые из них."
+  "What are you looking for?": "Чем Вы хотите заниматься?"
+  "yes": "да"
+  "no": "нет"
+  'All companies': 'Все компании'
+  'All selected': 'Все выбранные'
+  'Waiting for approval': 'Ожидающие одобрения'
+  "Welcome": "Добро пожаловать"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            login:
+              blank: "не может быть пустым"
+              too_short: "слишком короткий (минимум - 5 сиволов)"
+              invalid: " - недопустимый"
+            password:
+              blank: "не может быть пустым"
+              too_short: "слишком короткий (минимум - 5 сиволов)"
+              invalid: "должен состоять из латинских символов, цифр и хотя бы одной заглавной буквы"
+        student:
+          attributes:
+            fullname:
+              blank: "не может быть пустым"
+            departament:
+              blank: "не может быть пустым"
+            group:
+              blank: "не может быть пустым"
+            wish:
+              blank: "не может быть пустым"
+        company:
+          attributes:
+            name:
+              blank: "не может быть пустым"
+            vacancy:
+              blank: "не может быть пустым"
+            requirements:
+              blank: "не может быть пустым"
+            conditions:
+              blank: "не может быть пустым"
+
+  "Invalid login/password combination": "Неверная комбинация логин / пароль"
+  "Successfully updated": "Успешно сохранено"

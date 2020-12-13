@@ -2,9 +2,9 @@
   <thead>
     <tr class="text-center">
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Cancel the offer</th>
-      <th scope="col">More detailed</th>
+      <th scope="col"><%= t("Name") %></th>
+      <th scope="col"><%= t("Cancel the offer") %></th>
+      <th scope="col"><%= t("More detailed") %></th>
     </tr>
   </thead>
   <tbody>
@@ -12,15 +12,15 @@
       <tr class="text-center">
         <th scope="row"><%= i+1 %></th>
         <td><%= comp[:name] %></td>
-        <td><%= button_to "cancel", cancel_offer_path(comp), remote: true, class: "btn btn-lg wide del_row_if_suc" %></td>
+        <td><%= button_to t("cancel"), cancel_offer_path(comp), remote: true, class: "btn btn-lg wide del_row_if_suc" %></td>
         <td><%= button_to "▼", company_description_path(comp), remote: true, class: "btn btn-lg wide more", id: "btn"+comp[:id].to_s %></td>
       </tr>
       <tr>
         <td  id=<%= comp[:id].to_s %> colspan="4" hidden="true">
           <ul>
-            <li> Vacancy <p></p> </li>
-            <li> Requirements <p></p></li>
-            <li> Conditions <p></p></li>
+            <li><%=  t("Vacancy") %><p></p> </li>
+            <li><%=  t("Requirements") %><p></p></li>
+            <li><%=  t("Conditions") %><p></p></li>
           </ul>
           <input type="button" class="btn btn-lg wide roll_up" value="▲" />
         </td>

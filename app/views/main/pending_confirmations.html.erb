@@ -2,10 +2,10 @@
   <thead>
     <tr class="text-center">
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">What looking for</th>
-      <th scope="col">Cancel the acceptance</th>
-      <th scope="col">More detailed</th>
+      <th scope="col"><%= t("fullname") %></th>
+      <th scope="col"><%= t("What looking for") %></th>
+      <th scope="col"><%= t("Cancel the acceptance") %></th>
+      <th scope="col"><%= t("More detailed") %></th>
     </tr>
   </thead>
   <tbody>
@@ -14,16 +14,16 @@
         <th scope="row"><%= i+1 %></th>
         <td><%= stud.fullname %></td>
         <td><%= stud.wish %></td>
-        <td><%= button_to "cancel", cancel_acceptance_path(stud), remote: true, class: "btn btn-lg wide del_row_if_suc" %></td>
+        <td><%= button_to t("cancel"), cancel_acceptance_path(stud), remote: true, class: "btn btn-lg wide del_row_if_suc" %></td>
         <td><%= button_to "▼", student_description_path(stud), remote: true, class: "btn btn-lg wide more", id: "btn"+stud[:id].to_s %></td>
       </tr>
       <tr>
         <td  id=<%= stud[:id].to_s %> colspan="5" hidden="true">
           <ul>
-            <li> Departament <p></p> </li>
-            <li> Group <p></p></li>
+            <li><%= t("Departament") %><p></p> </li>
+            <li><%= t("Group") %><p></p></li>
             <li>
-              <%= button_to "Example of work", files_path(stud), method: :get, class: "btn btn-primary btn-lg" %>
+              <%= button_to t("Example of work"), files_path(stud), method: :get, class: "btn btn-primary btn-lg" %>
             </li>
           </ul>
           <input type="button" class="btn btn-lg wide roll_up" value="▲" />
