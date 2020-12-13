@@ -2,8 +2,11 @@ class MainController < ApplicationController
   before_action :pars_params, only: [:create]
   skip_before_action :unauthenticate, except: [:create, :new]
   skip_before_action :authenticate, only: [:new,:create,:index]
-  before_action :set_student, only: [:edit]
+  before_action :set_student, only: [:edit, :students]
   before_action :set_company, only: [:edit]
+  before_action :only_students, only: [:all_companies, :choosed_companies, :waiting_approval]
+  before_action :only_companies, only: [:all_applications, :pending_confirmations, :approved]
+
 
   #Main page
   def index
@@ -65,15 +68,66 @@ class MainController < ApplicationController
     render "edit#{company ? "_company" : "_student"}"
   end
 
+  #page for companies
   def companies
   end
 
-  def comp_show
+  #page with student's application
+  def all_applications
+    @students = Student.where(id: Offer.where(company_id: set_company.id, comp_agree: false).select(:student_id))
   end
 
+  #get student description
+  def student_description
+    student = Student.find_by_id(params[:id])
+    respond_to do |f|
+      f.json {render json: {id: params[:id].to_s, departament: student.departament, group: student.group}}
+    end
+  end
+
+  #company accepts offer
+  def accept_offer
+    offer = Offer.find_by(company_id: set_company.id, student_id: params[:id])
+    if offer
+      respond_to do |f|
+        f.json {render json: {success: (offer.update(comp_agree: true) ? true : false), error: offer.errors.full_messages }}
+      end
+    else
+      respond_to do |f|
+        f.json {render json: {success: false, error: "Unfound. Try to reload the page" }}
+      end
+    end
+  end
+
+  #List of pending confirmations students
+  def pending_confirmations
+    @students = Student.where(id: Offer.where(company_id: set_company.id, comp_agree: true, stud_agree: false).select(:student_id))
+  end
+
+  #cancel acceptance
+  def cancel_acceptance
+    offer = Offer.find_by(company_id: set_company.id, student_id: params[:id])
+    if offer
+      respond_to do |f|
+        f.json {render json: {success: (offer.update(comp_agree: false) ? true : false), error: offer.errors.full_messages }}
+      end
+    else
+      respond_to do |f|
+        f.json {render json: {success: false, error: "Unfound. Try to reload the page" }}
+      end
+    end
+  end
+
+  #List of approved application (students related to the company)
+  def approved
+    @students = Student.where(id: Offer.where(company_id: set_company.id, comp_agree: true, stud_agree: true).select(:student_id))
+  end
+
+  #page for students
   def students
   end
 
+  #page with all companies
   def all_companies
     @companies=[]
     Company.all
@@ -83,6 +137,7 @@ class MainController < ApplicationController
     end
   end
 
+  #student offer
   def offer_to_company
     unless Offer.find_by(student_id: set_student.id, company_id: params[:id])
       offer = Offer.new(student_id: set_student.id, company_id: params[:id])
@@ -92,37 +147,58 @@ class MainController < ApplicationController
     end
   end
 
-  def company_discibtion
+  #get company description
+  def company_description
     company = Company.find_by_id(params[:id])
     respond_to do |f|
       f.json {render json: {id: params[:id].to_s, vacancy: company.vacancy, requirements: company.requirements,conditions: company.conditions}}
     end
   end
 
+  #all choosed comapnies
   def choosed_companies
     @companies=[]
-    Company.where(id: Offer.where(student_id: session[:current_user_id]).select(:company_id))
+    Company.where(id: Offer.where(student_id: set_student.id).select(:company_id))
     .each do |comp|
       @companies << {id: comp.id, name: comp.name}
     end
   end
 
+  #cancel the offer
   def cancel_offer
     offer = Offer.find_by(student_id: set_student.id, company_id: params[:id])
     if offer
       respond_to do |f|
-        f.json do
-          render json:
-          if offer.delete
-            { success: true, action: "delete" }
-          else
-            { success: false, error: offer.errors.full_messages }
-          end
+        f.json {render json: {success: (offer.destroy ? true : false), error: offer.errors.full_messages }}
+      end
+    else
+      respond_to do |f|
+        f.json {render json: {success: false, error: "Unfound. Try to reload the page" }}
+      end
+    end
+  end
+
+  #List of waiting for approval companies
+  def waiting_approval
+    @companies = Company.where(id: Offer.where(student_id: set_student.id, comp_agree: true).select(:company_id))
+  end
+
+  #Approving an internship at company
+  def approve_company
+    offer = Offer.find_by(student_id: set_student.id, company_id: params[:id], comp_agree: true)
+    if offer
+      if offer.update(stud_agree: true) && Offer.where(student_id: set_student.id).where.not(company_id: params[:id]).destroy_all
+        respond_to do |f|
+          f.json {render json: {success: true, error: offer.errors.full_messages }}
+        end
+      else
+        respond_to do |f|
+          f.json {render json: {success: false, error: offer.errors.full_messages }}
         end
       end
     else
       respond_to do |f|
-        render json: {error: "Unfound"}
+        f.json {render json: {success: false, error: "Unfound. Try to reload the page" }}
       end
     end
   end
@@ -133,10 +209,7 @@ class MainController < ApplicationController
     end
   end
 
-
-  def stud_show
-  end
-
+  #send student's file
   def get_file
     file_path = "#{Rails.root}/public/uploads/#{params[:id].to_s}-example.pdf"
     if File.exists? file_path
@@ -148,7 +221,21 @@ class MainController < ApplicationController
   end
 
   private
+  #checking user status (need student without company to continue)
+  def only_students
+    if @_current_user.company or Offer.find_by(student_id: set_student.id, stud_agree: true)
+      redirect_to main_students_path
+    end
+  end
 
+  #checking user status (need company to continue)
+  def only_companies
+    unless @_current_user.company
+      redirect_to main_companies_path
+    end
+  end
+
+  #user's params
   def pars_params
     @login = params[:login]
     @password = params[:password]
@@ -156,16 +243,19 @@ class MainController < ApplicationController
     @company = params[:company] == "student" ? false : true
   end
 
+  #find student
   def set_student
     @student = Student.find_by_user_id(session[:current_user_id])
     #@student ||=
   end
 
+  #student's params
   def pars_params_student
     upload if params[:file]
     params.permit(:fullname, :departament, :group, :wish, :file).merge(user_id: session[:current_user_id])
   end
 
+  #upload file to public/uploads
   def upload
     uploaded_file = params[:file]
     File.open(Rails.root.join('public', 'uploads', set_student.id.to_s+"-example.pdf"), 'wb') do |file|
@@ -175,11 +265,13 @@ class MainController < ApplicationController
     params.delete(:file)
   end
 
+  #find company
   def set_company
     @company = Company.find_by_user_id(session[:current_user_id])
-    #@student ||=
+    #@company ||=
   end
 
+  #company's params
   def pars_params_company
     params.permit(:name, :vacancy, :requirements, :conditions).merge(user_id: session[:current_user_id])
   end

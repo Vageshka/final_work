@@ -12,8 +12,8 @@
       <tr class="text-center">
         <th scope="row"><%= i+1 %></th>
         <td><%= comp[:name] %></td>
-        <td><%= button_to "cancel", "/main/cancel_offer/#{comp[:id].to_s}.json", remote: true, class: "btn btn-lg wide" %></td>
-        <td><%= button_to "▼", "/main/all_companies/#{comp[:id].to_s}.json", remote: true, class: "btn btn-lg wide", id: "btn"+comp[:id].to_s %></td>
+        <td><%= button_to "cancel", cancel_offer_path(comp), remote: true, class: "btn btn-lg wide del_row_if_suc" %></td>
+        <td><%= button_to "▼", company_description_path(comp), remote: true, class: "btn btn-lg wide more", id: "btn"+comp[:id].to_s %></td>
       </tr>
       <tr>
         <td  id=<%= comp[:id].to_s %> colspan="4" hidden="true">

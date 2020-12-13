@@ -1,16 +1,42 @@
 <% unless @_current_user.company %>
 
-  <div class="text-center selection_menu">
-    <div class="row">
-      <%= link_to 'All companies', main_all_companies_path %>
+  <% if offer =Offer.find_by(student_id: @student.id, stud_agree: true) %>
+    <% company = Company.find(offer.company_id) %>
+    <p class="text text-center">
+      You have already chosen a company
+    </p>
+    <ul class=text>
+      <li>
+        Company name <br/>
+        <p><%= simple_format company.name %></p>
+      </li>
+      <li>
+        Vacancy <br/>
+        <p><%= simple_format company.vacancy %></p>
+      </li>
+      <li>
+        Requirements <br/>
+        <p><%= simple_format company.requirements %></p>
+      </li>
+      <li>
+        Conditions <br/>
+        <p><%= simple_format company.conditions %></p>
+      </li>
+    </ul>
+
+  <% else %>
+    <div class="text-center selection_menu">
+      <div class="row">
+        <%= link_to 'All companies', main_all_companies_path %>
+      </div>
+      <div class="row">
+        <%= link_to 'All selected', main_choosed_companies_path %>
+      </div>
+      <div class="row">
+        <%= link_to 'Waiting for approval', main_waiting_approval_path %>
+      </div>
     </div>
-    <div class="row">
-      <%= link_to 'All selected', main_choosed_companies_path %>
-    </div>
-    <div class="row">
-      <%= link_to 'Approved', session_new_path %>
-    </div>
-  </div>
+  <% end %>
 
 <% else %>
   <h2 class="welcome">
