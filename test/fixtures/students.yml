@@ -1,17 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  fullname: MyString
-  departament: MyString
-  group: MyString
-  wish: MyString
-  file: MyText
-  user: one
-
-two:
-  fullname: MyString
-  departament: MyString
-  group: MyString
-  wish: MyString
-  file: MyText
-  user: two
+# one:
+#   fullname: MyString
+#   departament: MyString
+#   group: MyString
+#   wish: MyString
+#   user: one
+#
+# two:
+#   fullname: MyString
+#   departament: MyString
+#   group: MyString
+#   wish: MyString
+#   user: two

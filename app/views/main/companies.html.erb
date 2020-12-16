@@ -1,16 +1,27 @@
 <% if @_current_user.company %>
 
-  <div class="text-center selection_menu">
-    <div class="row">
-    <%= link_to t('All applications'), main_all_applications_path %>
+  <% if @company %>
+
+    <div class="text-center selection_menu">
+      <div class="row">
+      <%= link_to t('All applications'), main_all_applications_path %>
+      </div>
+      <div class="row">
+      <%= link_to t('Pending confirmations'), main_pending_confirmations_path %>
+      </div>
+      <div class="row">
+      <%= link_to t('Approved'), main_approved_path %>
+      </div>
     </div>
-    <div class="row">
-    <%= link_to t('Pending confirmations'), main_pending_confirmations_path %>
-    </div>
-    <div class="row">
-    <%= link_to t('Approved'), main_approved_path %>
-    </div>
-  </div>
+
+  <% else %>
+    <h2 class="welcome">
+      <%= t("Please")+"," %>
+    </h2>
+    <p class="text text-center">
+      <%= t("fill in all the fields on") %><%= link_to(" "+t('your page'), main_students_path) %>
+    </p>
+  <% end %>
 
 <% else %>
   <h2 class="welcome">

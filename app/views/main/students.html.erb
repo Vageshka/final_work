@@ -1,41 +1,52 @@
 <% unless @_current_user.company %>
 
-  <% if offer = Offer.find_by(student_id: @student.id, stud_agree: true) %>
-    <% company = Company.find(offer.company_id) %>
-    <p class="text text-center">
-      You have already chosen a company
-    </p>
-    <ul class=text>
-      <li>
-        <%= t("Name") %> <br/>
-        <p><%= simple_format company.name %></p>
-      </li>
-      <li>
-        <%= t("Vacancy") %> <br/>
-        <p><%= simple_format company.vacancy %></p>
-      </li>
-      <li>
-        <%= t("Requirements") %> <br/>
-        <p><%= simple_format company.requirements %></p>
-      </li>
-      <li>
-        <%= t("Conditions") %> <br/>
-        <p><%= simple_format company.conditions %></p>
-      </li>
-    </ul>
+  <% if @student %>
+
+    <% if offer = Offer.find_by(student_id: @student.id, stud_agree: true) %>
+      <% company = Company.find(offer.company_id) %>
+      <p class="text text-center">
+        <%= t("You have already chosen a company") %>
+      </p>
+      <ul class=text>
+        <li>
+          <%= t("Name") %> <br/>
+          <p><%= simple_format company.name %></p>
+        </li>
+        <li>
+          <%= t("Vacancy") %> <br/>
+          <p><%= simple_format company.vacancy %></p>
+        </li>
+        <li>
+          <%= t("Requirements") %> <br/>
+          <p><%= simple_format company.requirements %></p>
+        </li>
+        <li>
+          <%= t("Conditions") %> <br/>
+          <p><%= simple_format company.conditions %></p>
+        </li>
+      </ul>
+
+    <% else %>
+      <div class="text-center selection_menu">
+        <div class="row">
+          <%= link_to t('All companies'), main_all_companies_path %>
+        </div>
+        <div class="row">
+          <%= link_to t('All selected'), main_choosed_companies_path %>
+        </div>
+        <div class="row">
+          <%= link_to t('Waiting for approval'), main_waiting_approval_path %>
+        </div>
+      </div>
+    <% end %>
 
   <% else %>
-    <div class="text-center selection_menu">
-      <div class="row">
-        <%= link_to t('All companies'), main_all_companies_path %>
-      </div>
-      <div class="row">
-        <%= link_to t('All selected'), main_choosed_companies_path %>
-      </div>
-      <div class="row">
-        <%= link_to t('Waiting for approval'), main_waiting_approval_path %>
-      </div>
-    </div>
+    <h2 class="welcome">
+      <%= t("Please")+"," %>
+    </h2>
+    <p class="text text-center">
+      <%= t("fill in all the fields on") %><%= link_to(" "+t('your page'), main_students_path) %>
+    </p>
   <% end %>
 
 <% else %>

@@ -7,7 +7,7 @@
         <h2><%= mes %></h2>
       <% end %>
     <% else %>
-      <% t.(flash[:status]) %>
+      <% t(flash[:status]) %>
     <% end %>
   </div>
 <% end %>
@@ -44,4 +44,6 @@
   </div>
 <% end %>
 
-<%= button_to t("Current uploaded file"), files_path(@student), method: :get, class: "btn btn-primary btn-lg wide" %>
+<% if @student %>
+  <%= button_to t("Current uploaded file"), files_path(@student), method: :get, class: "btn btn-primary btn-lg wide" %>
+<% end %>

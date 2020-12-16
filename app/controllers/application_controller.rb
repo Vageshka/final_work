@@ -9,15 +9,11 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate
-    unless current_user
-      redirect_to session_new_path
-    end
+    redirect_to session_new_path unless current_user
   end
 
   def unauthenticate
-    if current_user
-      redirect_back fallback_location: root_path
-    end
+    redirect_back fallback_location: root_path if current_user
   end
 
   def switch_locale(&action)
